@@ -2,7 +2,7 @@ package cz.cvut.fit.bietjv.exchange;
 
 import com.google.gson.Gson;
 import cz.cvut.fit.bietjv.exchange.controllers.StudentController;
-import cz.cvut.fit.bietjv.exchange.persistence.models.Student;
+import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.StudentRepository;
 import cz.cvut.fit.bietjv.exchange.services.StudentService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +40,8 @@ public class StudentControllerTests {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		students.add(new Student(1, "John", "Smith", 1));
-		students.add(new Student(2, "Test", "User", 1));
+		students.add(new Student(1, "John", "Smith"));
+		students.add(new Student(2, "Test", "User"));
 		given(this.studentRepository.findAll()).willReturn(students);
 	}
 
