@@ -1,4 +1,4 @@
-package cz.cvut.fit.bietjv.exchange.controllers;
+package cz.cvut.fit.bietjv.exchange.presentation;
 
 import com.google.gson.Gson;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Tag;
@@ -14,10 +14,11 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
+    private final Gson gson = new Gson();
 
     @GetMapping("/api/tags")
     public String index() {
         List<Tag> records = tagService.getAll();
-        return (new Gson()).toJson(records);
+        return gson.toJson(records);
     }
 }

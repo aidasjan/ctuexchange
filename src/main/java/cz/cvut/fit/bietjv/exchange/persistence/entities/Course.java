@@ -6,6 +6,7 @@ import java.util.List;
 @Entity(name = "courses")
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String code;
     private String name;
@@ -26,6 +27,12 @@ public class Course {
         this.id = id;
         this.code = code;
         this.name = name;
+    }
+
+    public Course(String code, String name, University university) {
+        this.code = code;
+        this.name = name;
+        this.university = university;
     }
 
     public int getId() {
@@ -50,5 +57,21 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

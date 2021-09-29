@@ -1,7 +1,7 @@
 package cz.cvut.fit.bietjv.exchange;
 
 import com.google.gson.Gson;
-import cz.cvut.fit.bietjv.exchange.controllers.StudentController;
+import cz.cvut.fit.bietjv.exchange.presentation.StudentController;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.StudentRepository;
 import cz.cvut.fit.bietjv.exchange.services.StudentService;

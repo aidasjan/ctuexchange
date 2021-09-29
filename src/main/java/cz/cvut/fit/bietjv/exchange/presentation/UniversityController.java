@@ -1,4 +1,4 @@
-package cz.cvut.fit.bietjv.exchange.controllers;
+package cz.cvut.fit.bietjv.exchange.presentation;
 
 import com.google.gson.Gson;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
@@ -14,10 +14,11 @@ public class UniversityController {
 
     @Autowired
     private UniversityService universityService;
+    private final Gson gson = new Gson();
 
     @GetMapping("/api/universities")
     public String index() {
         List<University> records = universityService.getAll();
-        return (new Gson()).toJson(records);
+        return gson.toJson(records);
     }
 }
