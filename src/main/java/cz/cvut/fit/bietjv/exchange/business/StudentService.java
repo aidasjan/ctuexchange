@@ -1,4 +1,4 @@
-package cz.cvut.fit.bietjv.exchange.services;
+package cz.cvut.fit.bietjv.exchange.business;
 
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.StudentRepository;
@@ -14,7 +14,7 @@ public class StudentService {
     @Autowired
     private StudentRepository repository;
 
-    public List<Student> getAll() {
+    public List<Student> index() {
         List<Student> allRecords = new ArrayList<>();
         repository.findAll().forEach(allRecords::add);
         return allRecords;

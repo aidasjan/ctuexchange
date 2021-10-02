@@ -4,10 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "courses")
-public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Course extends AbstractEntity {
     private String code;
     private String name;
 
@@ -29,18 +26,9 @@ public class Course {
         this.name = name;
     }
 
-    public Course(String code, String name, University university) {
+    public Course(String code, String name) {
         this.code = code;
         this.name = name;
-        this.university = university;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCode() {

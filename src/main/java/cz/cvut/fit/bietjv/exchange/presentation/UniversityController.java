@@ -2,7 +2,7 @@ package cz.cvut.fit.bietjv.exchange.presentation;
 
 import com.google.gson.Gson;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
-import cz.cvut.fit.bietjv.exchange.services.UniversityService;
+import cz.cvut.fit.bietjv.exchange.business.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +18,7 @@ public class UniversityController {
 
     @GetMapping("/api/universities")
     public String index() {
-        List<University> records = universityService.getAll();
+        List<University> records = universityService.index();
         return gson.toJson(records);
     }
 }

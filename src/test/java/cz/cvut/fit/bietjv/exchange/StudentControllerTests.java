@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import cz.cvut.fit.bietjv.exchange.presentation.StudentController;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.StudentRepository;
-import cz.cvut.fit.bietjv.exchange.services.StudentService;
+import cz.cvut.fit.bietjv.exchange.business.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
