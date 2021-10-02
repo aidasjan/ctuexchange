@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "universities")
-public class University {
+public class University extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,8 +15,7 @@ public class University {
 
     public University() { }
 
-    public University(int id, String name, String city) {
-        this.id = id;
+    public University(String name, String city) {
         this.name = name;
         this.city = city;
     }
