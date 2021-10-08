@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "tags")
-public class Tag {
+public class Tag extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,8 +14,7 @@ public class Tag {
 
     public Tag() { }
 
-    public Tag(int id, String name) {
-        this.id = id;
+    public Tag(String name) {
         this.name = name;
     }
 

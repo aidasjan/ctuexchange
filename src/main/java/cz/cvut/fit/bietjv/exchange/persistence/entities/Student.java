@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "students")
-public class Student {
+public class Student extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,6 +22,11 @@ public class Student {
     private List<Course> courses;
 
     public Student() { }
+
+    public Student(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 
     public Student(int id, String name, String surname) {
         this.id = id;
@@ -51,5 +56,21 @@ public class Student {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

@@ -1,11 +1,12 @@
 package cz.cvut.fit.bietjv.exchange.presentation;
 
-import com.google.gson.Gson;
+import cz.cvut.fit.bietjv.exchange.persistence.dtos.TagDto;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Tag;
 import cz.cvut.fit.bietjv.exchange.business.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,11 +15,36 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
-    private final Gson gson = new Gson();
 
     @GetMapping("/api/tags")
-    public String index() {
-        List<Tag> records = tagService.index();
-        return gson.toJson(records);
+    public List<Tag> index() {
+        return tagService.index();
+    }
+
+    @PostMapping("/api/tags")
+    public ResponseEntity<Tag> add(@RequestBody TagDto tag) {
+        Tag record = tagService.add(tag);
+        if (record == null) {
+            return new ResponseEntity<Tag>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Tag>(record, HttpStatus.OK);
+    }
+
+    @PutMapping("/api/tags/{id}")
+    public ResponseEntity<Tag> update(@PathVariable(value="id") int id, @RequestBody TagDto tag) {
+        Tag record = tagService.update(id, tag);
+        if (record == null) {
+            return new ResponseEntity<Tag>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Tag>(record, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/tags/{id}")
+    public ResponseEntity<Tag> destroy(@PathVariable(value="id") int id) {
+        boolean idDestroyed = tagService.destroy(id);
+        if (!idDestroyed) {
+            return new ResponseEntity<Tag>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Tag>(HttpStatus.OK);
     }
 }

@@ -7,9 +7,6 @@ import cz.cvut.fit.bietjv.exchange.persistence.repositories.CourseRepository;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,12 +32,11 @@ public class CourseService extends AbstractCrudService<Course, CourseDto, Course
         Optional<Course> course = repository.findById(id);
         Optional<University> university = universityRepository.findById(courseDto.getUniversityId());
         if (course.isPresent() && university.isPresent()) {
-            Course savedCourse = course.get();
-            savedCourse.setName(courseDto.getName());
-            savedCourse.setCode(courseDto.getCode());
-            savedCourse.setUniversity(university.get());
-            repository.save(savedCourse);
-            return savedCourse;
+            Course newCourse = courseDto.map();
+            newCourse.setId(id);
+            newCourse.setUniversity(university.get());
+            repository.save(newCourse);
+            return newCourse;
         }
         return null;
     }
