@@ -2,8 +2,10 @@ package cz.cvut.fit.bietjv.exchange.business;
 
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.CourseDto;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Course;
+import cz.cvut.fit.bietjv.exchange.persistence.entities.Tag;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.CourseRepository;
+import cz.cvut.fit.bietjv.exchange.persistence.repositories.TagRepository;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class CourseService extends AbstractCrudService<Course, CourseDto, Course
 
     @Autowired
     private UniversityRepository universityRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @Override
     public Course add(CourseDto courseDto) {
@@ -39,5 +44,29 @@ public class CourseService extends AbstractCrudService<Course, CourseDto, Course
             return newCourse;
         }
         return null;
+    }
+
+    public boolean addCourseTag(int courseId, int tagId) {
+        Optional<Course> course = repository.findById(courseId);
+        Optional<Tag> tag = tagRepository.findById(tagId);
+        if (course.isPresent() && tag.isPresent()) {
+            Course savedCourse = course.get();
+            savedCourse.addTag(tag.get());
+            repository.save(savedCourse);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeCourseTag(int courseId, int tagId) {
+        Optional<Course> course = repository.findById(courseId);
+        Optional<Tag> tag = tagRepository.findById(tagId);
+        if (course.isPresent() && tag.isPresent()) {
+            Course savedCourse = course.get();
+            savedCourse.removeTag(tag.get());
+            repository.save(savedCourse);
+            return true;
+        }
+        return false;
     }
 }

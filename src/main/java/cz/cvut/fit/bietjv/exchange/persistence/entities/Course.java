@@ -1,7 +1,7 @@
 package cz.cvut.fit.bietjv.exchange.persistence.entities;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "courses")
 public class Course extends AbstractEntity {
@@ -16,7 +16,7 @@ public class Course extends AbstractEntity {
     @JoinTable(name = "course_tags",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
     public Course() { }
 
@@ -55,11 +55,19 @@ public class Course extends AbstractEntity {
         this.university = university;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
     }
 }

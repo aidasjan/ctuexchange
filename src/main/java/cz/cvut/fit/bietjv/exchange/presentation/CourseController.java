@@ -32,6 +32,24 @@ public class CourseController {
         return new ResponseEntity<Course>(record, HttpStatus.OK);
     }
 
+    @PostMapping("/api/courses/{courseId}/tags/{tagId}")
+    public ResponseEntity<Course> addTag(@PathVariable(value="courseId") int courseId, @PathVariable(value="tagId") int tagId) {
+        boolean isAdded = courseService.addCourseTag(courseId, tagId);
+        if (!isAdded) {
+            return new ResponseEntity<Course>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Course>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/courses/{courseId}/tags/{tagId}")
+    public ResponseEntity<Course> removeTag(@PathVariable(value="courseId") int courseId, @PathVariable(value="tagId") int tagId) {
+        boolean isRemoved = courseService.removeCourseTag(courseId, tagId);
+        if (!isRemoved) {
+            return new ResponseEntity<Course>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Course>(HttpStatus.OK);
+    }
+
     @PutMapping("/api/courses/{id}")
     public ResponseEntity<Course> update(@PathVariable(value="id") int id, @RequestBody CourseDto course) {
         Course record = courseService.update(id, course);
