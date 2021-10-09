@@ -1,6 +1,7 @@
 package cz.cvut.fit.bietjv.exchange.presentation;
 
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.StudentDto;
+import cz.cvut.fit.bietjv.exchange.persistence.entities.Course;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.business.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,24 @@ public class StudentController {
             return new ResponseEntity<Student>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Student>(record, HttpStatus.OK);
+    }
+
+    @PostMapping("/api/students/{studentId}/courses/{courseId}")
+    public ResponseEntity<Student> addCourse(@PathVariable(value="studentId") int studentId, @PathVariable(value="courseId") int courseId) {
+        boolean isAdded = studentService.addStudentCourse(studentId, courseId);
+        if (!isAdded) {
+            return new ResponseEntity<Student>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Student>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/students/{studentId}/courses/{courseId}")
+    public ResponseEntity<Student> removeCourse(@PathVariable(value="studentId") int studentId, @PathVariable(value="courseId") int courseId) {
+        boolean isRemoved = studentService.removeStudentCourse(studentId, courseId);
+        if (!isRemoved) {
+            return new ResponseEntity<Student>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Student>(HttpStatus.OK);
     }
 
     @DeleteMapping("/api/students/{id}")

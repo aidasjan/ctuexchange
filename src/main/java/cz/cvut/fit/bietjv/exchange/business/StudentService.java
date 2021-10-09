@@ -1,8 +1,10 @@
 package cz.cvut.fit.bietjv.exchange.business;
 
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.StudentDto;
+import cz.cvut.fit.bietjv.exchange.persistence.entities.Course;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
+import cz.cvut.fit.bietjv.exchange.persistence.repositories.CourseRepository;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.StudentRepository;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class StudentService extends AbstractCrudService<Student, StudentDto, Stu
 
     @Autowired
     private UniversityRepository universityRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Override
     public Student add(StudentDto studentDto) {
@@ -39,5 +44,29 @@ public class StudentService extends AbstractCrudService<Student, StudentDto, Stu
             return newStudent;
         }
         return null;
+    }
+
+    public boolean addStudentCourse(int studentId, int courseId) {
+        Optional<Student> student = repository.findById(studentId);
+        Optional<Course> course = courseRepository.findById(courseId);
+        if (student.isPresent() && course.isPresent()) {
+            Student savedStudent = student.get();
+            savedStudent.addCourse(course.get());
+            repository.save(savedStudent);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeStudentCourse(int studentId, int courseId) {
+        Optional<Student> student = repository.findById(studentId);
+        Optional<Course> course = courseRepository.findById(courseId);
+        if (student.isPresent() && course.isPresent()) {
+            Student savedStudent = student.get();
+            savedStudent.removeCourse(course.get());
+            repository.save(savedStudent);
+            return true;
+        }
+        return false;
     }
 }

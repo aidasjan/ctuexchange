@@ -1,7 +1,7 @@
 package cz.cvut.fit.bietjv.exchange.persistence.entities;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "students")
 public class Student extends AbstractEntity {
@@ -19,7 +19,7 @@ public class Student extends AbstractEntity {
     @JoinTable(name = "student_courses",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
-    private List<Course> courses;
+    private Set<Course> courses;
 
     public Student() { }
 
@@ -66,11 +66,19 @@ public class Student extends AbstractEntity {
         this.university = university;
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
+
+    public void removeCourse(Course course) {
+        this.courses.remove(course);
     }
 }
