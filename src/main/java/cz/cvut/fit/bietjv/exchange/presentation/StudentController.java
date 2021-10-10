@@ -1,5 +1,6 @@
 package cz.cvut.fit.bietjv.exchange.presentation;
 
+import cz.cvut.fit.bietjv.exchange.persistence.dtos.CourseRecommendationDto;
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.StudentDto;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Course;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
@@ -29,6 +30,15 @@ public class StudentController {
             return new ResponseEntity<Student>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Student>(record, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/students/{id}/courseRecommendations")
+    public ResponseEntity<List<CourseRecommendationDto>> getCourseRecommendations(@PathVariable(value="id") int id) {
+        List<CourseRecommendationDto> recommendations = studentService.getCourseRecommendations(id);
+        if (recommendations == null) {
+            return new ResponseEntity<List<CourseRecommendationDto>>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<CourseRecommendationDto>>(recommendations, HttpStatus.OK);
     }
 
     @PutMapping("/api/students/{id}")
