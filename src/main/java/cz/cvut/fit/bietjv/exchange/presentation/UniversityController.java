@@ -1,5 +1,6 @@
 package cz.cvut.fit.bietjv.exchange.presentation;
 
+import cz.cvut.fit.bietjv.exchange.persistence.dtos.UniversityCreditsDto;
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.UniversityDto;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
 import cz.cvut.fit.bietjv.exchange.business.UniversityService;
@@ -45,5 +46,10 @@ public class UniversityController {
             return new ResponseEntity<University>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<University>(HttpStatus.OK);
+    }
+
+    @GetMapping("/api/universities/credits")
+    public List<UniversityCreditsDto> getUniversityCredits() {
+        return universityService.getUniversityCredits();
     }
 }

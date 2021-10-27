@@ -6,10 +6,11 @@ import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
 public class CourseDto implements IEntityDto<Course>{
     private String name;
     private String code;
+    private int credits;
     private int universityId;
 
     public Course map() {
-        return new Course(this.code, this.name);
+        return new Course(this.code, this.name, this.credits);
     }
 
     public String getName() {

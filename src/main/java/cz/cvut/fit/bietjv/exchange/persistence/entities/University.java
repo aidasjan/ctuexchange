@@ -7,13 +7,17 @@ import javax.persistence.Id;
 
 @Entity(name = "universities")
 public class University extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
     private String name;
     private String city;
 
     public University() { }
+
+    public University(int id, String name, String city) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+    }
 
     public University(String name, String city) {
         this.name = name;

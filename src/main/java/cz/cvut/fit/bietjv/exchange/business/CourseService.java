@@ -1,6 +1,7 @@
 package cz.cvut.fit.bietjv.exchange.business;
 
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.CourseDto;
+import cz.cvut.fit.bietjv.exchange.persistence.dtos.UniversityCreditsDto;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Course;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Tag;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.University;
@@ -9,6 +10,8 @@ import cz.cvut.fit.bietjv.exchange.persistence.repositories.TagRepository;
 import cz.cvut.fit.bietjv.exchange.persistence.repositories.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service

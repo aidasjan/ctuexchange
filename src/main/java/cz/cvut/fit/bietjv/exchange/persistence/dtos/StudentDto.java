@@ -7,6 +7,16 @@ public class StudentDto implements IEntityDto<Student>{
     private String surname;
     private int universityId;
 
+    public StudentDto() {
+
+    }
+
+    public StudentDto(String name, String surname, int universityId) {
+        this.name = name;
+        this.surname = surname;
+        this.universityId = universityId;
+    }
+
     public Student map() {
         return new Student(this.name, this.surname);
     }

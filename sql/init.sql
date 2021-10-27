@@ -28,6 +28,7 @@ CREATE TABLE courses (
     `id` int NOT NULL AUTO_INCREMENT,
     `code` varchar(255),
     `name` varchar(255),
+    `credits` int,
     `university_id` int NOT NULL,
     PRIMARY KEY (`id`)
 );
@@ -60,8 +61,8 @@ INSERT INTO universities (id, name, city) VALUES (2, 'Kaunas University of Techn
 INSERT INTO students (id, name, surname, university_id) VALUES (1, 'John', 'Smith', 1);
 INSERT INTO students (id, name, surname, university_id) VALUES (2, 'William', 'Johnson', 1);
 
-INSERT INTO courses (id, code, name, university_id) VALUES (1, 'BIE-TJV', 'Java Technology', 1);
-INSERT INTO courses (id, code, name, university_id) VALUES (2, 'P000B000', 'Test Course', 2);
+INSERT INTO courses (id, code, name, credits, university_id) VALUES (1, 'BIE-TJV', 'Java Technology', 5, 1);
+INSERT INTO courses (id, code, name, credits, university_id) VALUES (2, 'P000B000', 'Test Course', 6, 2);
 
 INSERT INTO tags (id, name) VALUES (1, 'IT');
 INSERT INTO tags (id, name) VALUES (2, 'Chemistry');

@@ -1,13 +1,13 @@
 package cz.cvut.fit.bietjv.exchange.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "students")
 public class Student extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String name;
     private String surname;
 
@@ -19,6 +19,7 @@ public class Student extends AbstractEntity {
     @JoinTable(name = "student_courses",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    @JsonManagedReference
     private Set<Course> courses;
 
     public Student() { }
@@ -28,10 +29,12 @@ public class Student extends AbstractEntity {
         this.surname = surname;
     }
 
-    public Student(int id, String name, String surname) {
+    public Student(int id, String name, String surname, University university) {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.university = university;
+        this.courses = new HashSet<>();
     }
 
     public int getId() {

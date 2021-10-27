@@ -7,9 +7,7 @@ import javax.persistence.Id;
 
 @Entity(name = "tags")
 public class Tag extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
     private String name;
 
     public Tag() { }
