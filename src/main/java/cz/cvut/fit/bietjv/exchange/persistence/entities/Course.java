@@ -3,6 +3,7 @@ package cz.cvut.fit.bietjv.exchange.persistence.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "courses")
@@ -36,6 +37,7 @@ public class Course extends AbstractEntity {
         this.name = name;
         this.credits = credits;
         this.university = university;
+        this.tags = new HashSet<Tag>();
     }
 
     public Course(int id, String code, String name, int credits) {

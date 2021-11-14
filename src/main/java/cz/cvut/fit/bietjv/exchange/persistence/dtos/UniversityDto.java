@@ -6,6 +6,13 @@ public class UniversityDto implements IEntityDto<University> {
     private String name;
     private String city;
 
+    public UniversityDto() { }
+
+    public UniversityDto(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
     @Override
     public University map() {
         return new University(name, city);

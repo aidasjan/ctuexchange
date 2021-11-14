@@ -22,8 +22,8 @@ public class TagController {
     }
 
     @PostMapping("/api/tags")
-    public ResponseEntity<Tag> add(@RequestBody TagDto tag) {
-        Tag record = tagService.add(tag);
+    public ResponseEntity<Tag> add(@RequestBody TagDto tagDto) {
+        Tag record = tagService.add(tagDto);
         if (record == null) {
             return new ResponseEntity<Tag>(HttpStatus.BAD_REQUEST);
         }
@@ -31,8 +31,8 @@ public class TagController {
     }
 
     @PutMapping("/api/tags/{id}")
-    public ResponseEntity<Tag> update(@PathVariable(value="id") int id, @RequestBody TagDto tag) {
-        Tag record = tagService.update(id, tag);
+    public ResponseEntity<Tag> update(@PathVariable(value="id") int id, @RequestBody TagDto tagDto) {
+        Tag record = tagService.update(id, tagDto);
         if (record == null) {
             return new ResponseEntity<Tag>(HttpStatus.BAD_REQUEST);
         }

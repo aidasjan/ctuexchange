@@ -2,7 +2,6 @@ package cz.cvut.fit.bietjv.exchange.presentation;
 
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.CourseRecommendationDto;
 import cz.cvut.fit.bietjv.exchange.persistence.dtos.StudentDto;
-import cz.cvut.fit.bietjv.exchange.persistence.entities.Course;
 import cz.cvut.fit.bietjv.exchange.persistence.entities.Student;
 import cz.cvut.fit.bietjv.exchange.business.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class StudentController {
 
     @GetMapping("/api/students/{id}/courseRecommendations")
     public ResponseEntity<List<CourseRecommendationDto>> getCourseRecommendations(@PathVariable(value="id") int id) {
-        List<CourseRecommendationDto> recommendations = studentService.getCourseRecommendations(id);
+        List<CourseRecommendationDto> recommendations = studentService.recommendCourses(id);
         if (recommendations == null) {
             return new ResponseEntity<List<CourseRecommendationDto>>(HttpStatus.BAD_REQUEST);
         }

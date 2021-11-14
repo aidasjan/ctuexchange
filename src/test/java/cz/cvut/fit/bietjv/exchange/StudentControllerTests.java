@@ -49,7 +49,7 @@ public class StudentControllerTests {
 		CourseRecommendationDto cr = new CourseRecommendationDto(c1, 3);
 		List<CourseRecommendationDto> courseRecommendationDtos = List.of(cr);
         given(this.studentService.index()).willReturn(students);
-        given(this.studentService.getCourseRecommendations(1)).willReturn(courseRecommendationDtos);
+        given(this.studentService.recommendCourses(1)).willReturn(courseRecommendationDtos);
 	}
 
 	@Test
@@ -100,7 +100,7 @@ public class StudentControllerTests {
     public void getCourseRecommendationsTest() {
         ResponseEntity<String> response = template.getForEntity("/api/students/1/courseRecommendations", String.class);
         CourseRecommendationDto[] result = gson.fromJson(response.getBody(), CourseRecommendationDto[].class);
-        assertThat(result[0].getName()).isEqualTo("Test Course");
+        assertThat(result[0].getCourse().getName()).isEqualTo("Test Course");
         assertThat(result[0].getCompatibilityScore()).isEqualTo(3);
     }
 }

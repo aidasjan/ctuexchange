@@ -5,6 +5,12 @@ import cz.cvut.fit.bietjv.exchange.persistence.entities.Tag;
 public class TagDto implements IEntityDto<Tag> {
     private String name;
 
+    public TagDto() { }
+
+    public TagDto(String name) {
+        this.name = name;
+    }
+
     @Override
     public Tag map() {
         return new Tag(name);

@@ -9,6 +9,13 @@ public class CourseDto implements IEntityDto<Course>{
     private int credits;
     private int universityId;
 
+    public CourseDto(String name, String code, int credits, int universityId) {
+        this.name = name;
+        this.code = code;
+        this.credits = credits;
+        this.universityId = universityId;
+    }
+
     public Course map() {
         return new Course(this.code, this.name, this.credits);
     }

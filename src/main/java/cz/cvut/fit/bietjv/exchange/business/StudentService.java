@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService extends AbstractCrudService<Student, StudentDto, StudentRepository> {
@@ -78,12 +80,19 @@ public class StudentService extends AbstractCrudService<Student, StudentDto, Stu
         return false;
     }
 
-    public List<CourseRecommendationDto> getCourseRecommendations(int studentId) {
+    public List<CourseRecommendationDto> recommendCourses(int studentId) {
         Optional<Student> student = repository.findById(studentId);
         if (student.isEmpty()) {
             return null;
         }
         Student savedStudent = student.get();
+        List<CourseRecommendationDto> courseRecommendations = getRecommendedCourses(savedStudent);
+        List<CourseRecommendationDto> coursesToAdd = getRecommendedCoursesToAdd(courseRecommendations);
+        addRecommendedCourses(savedStudent, coursesToAdd);
+        return coursesToAdd;
+    }
+
+    private List<CourseRecommendationDto> getRecommendedCourses(Student savedStudent) {
         List<Course> allCourses = courseService.index();
         List<CourseRecommendationDto> courseRecommendations = new ArrayList<CourseRecommendationDto>();
         for (Course course: allCourses) {
@@ -103,5 +112,15 @@ public class StudentService extends AbstractCrudService<Student, StudentDto, Stu
             courseRecommendations.add(new CourseRecommendationDto(course, compatibilityScore));
         }
         return courseRecommendations;
+    }
+
+    private List<CourseRecommendationDto> getRecommendedCoursesToAdd(List<CourseRecommendationDto> recommendations) {
+        recommendations.sort(Comparator.comparingInt(CourseRecommendationDto::getCompatibilityScore).reversed());
+        return recommendations.stream().limit(3).collect(Collectors.toList());
+    }
+
+    private void addRecommendedCourses(Student savedStudent, List<CourseRecommendationDto> courseRecommendations) {
+        courseRecommendations.stream().map(CourseRecommendationDto::getCourse).forEach(savedStudent::addCourse);
+        repository.save(savedStudent);
     }
 }
