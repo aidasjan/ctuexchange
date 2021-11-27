@@ -17,7 +17,7 @@ export default function CourseRecommendations({ studentId, onChange }) {
   };
 
   return (
-    <ButtonModal text="Course Recommendations" className="btn btn-info">
+    <ButtonModal text="Course Recommendations" className="btn btn-secondary">
       <Container className="text-center">
         <button onClick={handleClick} className="btn btn-primary mt-4 mb-4">
           Recommend Courses

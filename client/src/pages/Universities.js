@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container } from "reactstrap";
 import Crud from "../components/Crud";
+import UniversityCredits from "../components/UniversityCredits";
 
 export default function Universities(props) {
   return (
@@ -14,6 +15,7 @@ export default function Universities(props) {
           { key: "city", label: "City" },
         ]}
       />
+      <UniversityCredits />
     </Container>
   );
 }
