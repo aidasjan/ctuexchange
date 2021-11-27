@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "reactstrap";
+import CourseRecommendations from "../components/CourseRecommendations";
 import Crud from "../components/Crud";
 import ManyToManySelector from "../components/ManyToManySelector";
 
@@ -44,6 +45,9 @@ export default function Students(props) {
             onChange={handleRefresh}
           />
         )}
+        renderCustomElement={(record, handleRefresh) => 
+          <CourseRecommendations studentId={record.id} onChange={handleRefresh} />
+        }
       />
     </Container>
   );

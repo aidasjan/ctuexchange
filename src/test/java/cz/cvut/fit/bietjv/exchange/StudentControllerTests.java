@@ -98,7 +98,7 @@ public class StudentControllerTests {
 
     @Test
     public void getCourseRecommendationsTest() {
-        ResponseEntity<String> response = template.getForEntity("/api/students/1/courseRecommendations", String.class);
+        ResponseEntity<String> response = template.postForEntity("/api/students/1/courseRecommendations", null, String.class);
         CourseRecommendationDto[] result = gson.fromJson(response.getBody(), CourseRecommendationDto[].class);
         assertThat(result[0].getCourse().getName()).isEqualTo("Test Course");
         assertThat(result[0].getCompatibilityScore()).isEqualTo(3);

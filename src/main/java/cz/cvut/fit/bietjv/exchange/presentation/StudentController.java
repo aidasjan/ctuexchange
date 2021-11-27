@@ -31,7 +31,7 @@ public class StudentController {
         return new ResponseEntity<Student>(record, HttpStatus.OK);
     }
 
-    @GetMapping("/api/students/{id}/courseRecommendations")
+    @PostMapping("/api/students/{id}/courseRecommendations")
     public ResponseEntity<List<CourseRecommendationDto>> getCourseRecommendations(@PathVariable(value="id") int id) {
         List<CourseRecommendationDto> recommendations = studentService.recommendCourses(id);
         if (recommendations == null) {

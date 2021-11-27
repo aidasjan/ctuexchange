@@ -8,7 +8,7 @@ import { ButtonModal } from './ButtonModal';
 import CrudForm from './CrudForm';
 
 export default function Crud(props) {
-  const { url, tableColumns, getTableRowItems, formInputs, renderManyToManySelector } = props;
+  const { url, tableColumns, getTableRowItems, formInputs, renderManyToManySelector, renderCustomElement } = props;
   const [records, setRecords] = useState([]);
 
   const refreshTable = () => {
@@ -54,6 +54,7 @@ export default function Crud(props) {
             <th></th>
             <th></th>
             {renderManyToManySelector ? <th></th> : null}
+            {renderCustomElement ? <th></th> : null}
           </tr>
           {records.map((record) => (
             <tr>
@@ -81,6 +82,7 @@ export default function Crud(props) {
                 </button>
               </td>
               {renderManyToManySelector ? <td>{renderManyToManySelector(record, refreshTable)}</td> : null}
+              {renderCustomElement ? <td>{renderCustomElement(record, refreshTable)}</td> : null}
             </tr>
           ))}
         </tbody>
