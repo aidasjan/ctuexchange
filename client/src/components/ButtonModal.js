@@ -26,7 +26,7 @@ export const ButtonModal = (props) => {
             style={{ borderRadius: 0 }}
             onClick={closeModal}
           >
-            Cancel
+            Close
           </button>
         </Col>
       </Modal>

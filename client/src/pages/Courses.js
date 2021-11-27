@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import Crud from "../components/Crud";
+import ManyToManySelector from "../components/ManyToManySelector";
 
 export default function Courses(props) {
   const [universities, setUniversities] = useState([]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     fetch("/api/universities").then((response) =>
       response.json().then((results) => setUniversities(results))
+    );
+    fetch("/api/tags").then((response) =>
+      response.json().then((results) => setTags(results))
     );
   }, []);
 
@@ -30,6 +35,15 @@ export default function Courses(props) {
             findId: (record) => record.university.id,
           },
         ]}
+        renderManyToManySelector={(record, handleRefresh) => (
+          <ManyToManySelector
+            buttonText="Edit Tags"
+            postUrl={`/api/courses/${record.id}/tags`}
+            items={tags}
+            selectedItems={record.tags}
+            onChange={handleRefresh}
+          />
+        )}
       />
     </Container>
   );

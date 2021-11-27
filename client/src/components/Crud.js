@@ -8,7 +8,7 @@ import { ButtonModal } from './ButtonModal';
 import CrudForm from './CrudForm';
 
 export default function Crud(props) {
-  const { url, tableColumns, getTableRowItems, formInputs } = props;
+  const { url, tableColumns, getTableRowItems, formInputs, renderManyToManySelector } = props;
   const [records, setRecords] = useState([]);
 
   const refreshTable = () => {
@@ -38,20 +38,22 @@ export default function Crud(props) {
 
   return (
     <div>
-      <ButtonModal text='Add New Item' className='btn btn-primary my-3'>
-        <Container className='py-3'>
+      <ButtonModal text="Add New Item" className="btn btn-primary my-3">
+        <Container className="py-3">
           <h3>Add Item</h3>
-          <CrudForm formInputs={formInputs} onSubmit={handleAdd}/>
+          <CrudForm formInputs={formInputs} onSubmit={handleAdd} />
         </Container>
       </ButtonModal>
-      
+
       <Table className="">
         <tbody>
           <tr>
             {tableColumns.map((column) => (
               <th>{column}</th>
             ))}
-            <th></th><th></th>
+            <th></th>
+            <th></th>
+            {renderManyToManySelector ? <th></th> : null}
           </tr>
           {records.map((record) => (
             <tr>
@@ -59,21 +61,26 @@ export default function Crud(props) {
                 <td>{item}</td>
               ))}
               <td>
-                <ButtonModal text='Edit' className='btn btn-primary'>
-                  <Container className='py-3'>
+                <ButtonModal text="Edit" className="btn btn-primary">
+                  <Container className="py-3">
                     <h3>Edit Item</h3>
-                    <CrudForm record={record} formInputs={formInputs} onSubmit={handleUpdate}/>
+                    <CrudForm
+                      record={record}
+                      formInputs={formInputs}
+                      onSubmit={handleUpdate}
+                    />
                   </Container>
                 </ButtonModal>
               </td>
               <td>
                 <button
-                  className='btn btn-danger'
+                  className="btn btn-danger"
                   onClick={() => handleDelete(record)}
                 >
                   Delete
                 </button>
               </td>
+              {renderManyToManySelector ? <td>{renderManyToManySelector(record, refreshTable)}</td> : null}
             </tr>
           ))}
         </tbody>
