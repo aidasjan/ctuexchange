@@ -12,7 +12,7 @@ export default function CrudForm({ record, onSubmit, formInputs }) {
               <Label>{input.label}</Label>
               <Input type="select" id={input.key}>
                 {input.options.map((option) =>
-                  record && input.findId(record) == option.value ? (
+                  record && input.findId(record) === option.value ? (
                     <option value={option.value} selected>
                       {option.label}
                     </option>

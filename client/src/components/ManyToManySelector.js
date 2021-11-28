@@ -5,7 +5,7 @@ import { ButtonModal } from "./ButtonModal";
 
 export default function ManyToManySelector({ buttonText, items, selectedItems, postUrl, onChange }) {
   const itemsWithSelections = items.map((item) => {
-    selectedItems.find(r => r.id == item.id) ? item.isSelected = true : item.isSelected = false
+    selectedItems.find(r => r.id === item.id) ? item.isSelected = true : item.isSelected = false
     return item;
   });
 

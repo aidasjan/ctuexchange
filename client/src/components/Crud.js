@@ -28,13 +28,13 @@ export default function Crud(props) {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    const id = [...e.target].find(t => t.id == 'id').value;
+    const id = [...e.target].find(t => t.id === 'id').value;
     formFetch(`${url}/${id}`, "PUT", e).then(() => refreshTable());
   }
 
   useEffect(() => {
     refreshTable();
-  }, []);
+  }, [refreshTable]);
 
   return (
     <div>
