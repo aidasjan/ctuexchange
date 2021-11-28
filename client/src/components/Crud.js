@@ -34,7 +34,7 @@ export default function Crud(props) {
 
   useEffect(() => {
     refreshTable();
-  }, [refreshTable]);
+  }, []);
 
   return (
     <div>

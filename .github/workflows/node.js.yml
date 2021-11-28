@@ -25,5 +25,5 @@ jobs:
       with:
         node-version: '12.x'
         cache-dependency-path: client/package-lock.json
-    - run: npm install
-    - run: npm run build --if-present
+    - run: npm ci
+    - run: CI= npm run build --if-present
